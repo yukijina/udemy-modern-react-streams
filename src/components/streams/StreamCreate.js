@@ -17,14 +17,20 @@ class StreamCreate extends React.Component {
             </div>
         )
     }
+
+    onSubmit = (formValues) => {
+        console.log('form', formValues)
+    }
     
     render() {
         //show redux-form helper
         //console.log(this.props)
         return (
-            <form className="ui form">
+            //handleSubmit - function of redux-form, argument this.onSubmit is from helper
+            <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form">
                 <Field name="title" component={this.renderInput} label="Enter Title" />
                 <Field name="description" component={this.renderInput} label="Enter Description" />
+                <button className="ui button primary">Submit</button>
             </form>
         )
     }
