@@ -1,7 +1,8 @@
 import React from 'react';
 //Field is component (capital letter), reduxForm is function
 import { Field, reduxForm } from 'redux-form';
-import { tsExpressionWithTypeArguments } from '@babel/types';
+import { connect } from 'react-redux';
+import { createStream } from '../../actions/index';
 
 class StreamCreate extends React.Component { 
 
@@ -33,8 +34,8 @@ class StreamCreate extends React.Component {
         )
     }
 
-    onSubmit = (formValues) => {
-        console.log('form', formValues)
+    onSubmit = formValues => {
+        this.props.createStream(formValues)
     }
     
     render() {
@@ -67,5 +68,8 @@ const validate = (formValues) => {
 //hooked up reduxForm
 //reduxForm function is similer syntax as connect - reduxFrom returns function() and immediately call the function (StreamCreate)
 //reduxForm takes single object - string of name of the form
-export default reduxForm({ form: 'streamCreate', validate})(StreamCreate);
+//export default connect()(reduxForm({ form: 'streamCreate', validate})(StreamCreate))
 
+//refactor
+const formWrapped = reduxForm({ form: 'streamCreate', validate})(StreamCreate);
+export default connect(null, {createStream})(formWrapped);
