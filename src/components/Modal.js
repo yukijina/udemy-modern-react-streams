@@ -8,15 +8,10 @@ const Modal = props => {
             {/* The above event won't be bubble up */}
             <div onClick={(e)=> e.stopPropagation()} className="ui standard modal visible active">
                 <div className="header">
-                    Delete Stream
+                    {props.title}
                 </div>
-                <div className="content">
-                    Are you sure you want to delete this stream?
-                </div>
-                <div className="actions">
-                    <button className="ui button primary">Delete</button>
-                    <button className="ui button">Cancel</button>
-                </div>
+                <div className="content">{props.content}</div>
+                <div className="actions">{props.actions}</div>
             </div>
         </div>,
         document.getElementById('modal')
